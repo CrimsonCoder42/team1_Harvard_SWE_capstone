@@ -14,7 +14,7 @@ roles_and_permissions = {
     'user2': ['read']
 }
 
-# Define a decorator to check if a user has the proper permissions
+# Define a decorator to check user permissions
 def has_permission(permission):
     def decorator(func):
         @jwt_required
@@ -33,7 +33,7 @@ def login():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
 
-    # Authenticate the user (this is just a dummy authentication logic)
+    # Authenticate the user
     if username != 'admin' or password != 'secret':
         return {'message': 'Bad username or password'}, 401
 
@@ -51,7 +51,7 @@ def get_resource():
 @app.route('/resource', methods=['POST'])
 @has_permission('write')
 def create_resource():
-    # Create the resource (this is just a dummy implementation)
+    # Create the resource
     return {'message': 'Resource created'}, 201
 
 if __name__ == '__main__':
